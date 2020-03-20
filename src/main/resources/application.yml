@@ -1,0 +1,97 @@
+server:
+  port: 8090
+
+
+spring.data.neo4j.uri: bolt://localhost:7687
+spring.data.neo4j.username: neo4j
+spring.data.neo4j.password: a65f3aa3
+spring.data.neo4j.initial.connection.timeout.ms: 30000
+spring.data.neo4j.connection.timeout.ms: 30000
+spring.data.neo4j.connection.liveness.check.timeout.ms: 30000
+
+
+adapter:
+  time-to-run: 0
+  delay-milliseconds: 3000
+  afd-event: nextgen.afd.adapter.event
+  sql.statements:
+    cache-evict:
+      rate.ms: 3600000
+  job.scheduler.cron.expression: "0/30 * * * * ?"
+  batch:
+    chunk.size: 100
+    commit.interval: 10
+    skip.limit: 10000
+    maximum.threads: 15
+    throttle.limit: 10
+  polling.strategies: ADAPTER_NAME:EmpAddTrCntx, ADAPTER_NAME:ADAPTER_NAME1
+  #perform comparison with destination. default is true. set to false to skip comparison and force insert/update of destination.
+  performInstanceComparison: true
+
+events:
+  repository:
+    batch-size: 10
+  pool-size: 1
+
+destination:
+  repository:
+    type: rdbms
+    rdbms:
+      dialect: ansi
+      dbschema: ptdm_o
+      url: jdbc:postgresql://localhost:5432/devdb
+      username: rwuser
+      password: dev3456r0l3
+      configuration:
+        leakDetectionThreshold: 30000
+        maximumPoolSize: 25
+        poolName: rdbmsPool
+    ngbatch:
+      dialect: ansi
+      dbschema: nextgen_batch
+      url: jdbc:postgresql://localhost:5432/devdb?currentSchema=${destination.repository.ngbatch.dbschema}
+      username: rwuser
+      password: dev3456r0l3
+      configuration:
+        leakDetectionThreshold: 30000
+        maximumPoolSize: 25
+        poolName: ngbatchPool
+
+nextgen:
+  context: nextgen
+  dispatcher:
+    uri: http://localhost:8082/nextgen/v1/dispatcher
+    endpoints:
+      process: /process
+      notify: /notify
+      processAndNotify: /processAndNotify
+      unlockAdapterEvent: /adapter/event/unlock
+      unlockAdapterEvents: /adapter/event/unlockAll
+
+apiVersion: v1
+
+
+spring:
+  batch:
+    initializer.enabled: false
+    job.enabled: false
+    job.names:
+  output.ansi.enabled: always
+
+  data:
+    mongodb:
+      uri:  mongodb://localhost:27017/testdb
+    neo4j:
+      uri: bolt://localhost:7687
+      password: admin
+      username: neo4j
+
+#afd
+afd.uri: localhost:9000/afd/v1
+afd.enabled: true
+adapter.dispatch.event: adapter.dispatch.event
+afd.protocol: http4
+
+legacy.table.prefix: LEGACY_
+
+

@@ -1,0 +1,80 @@
+server:
+  port: 8196
+
+ignoreDatabaseConstraints: true
+
+tables.inner: L2_CONSUMER,L3_CONSUMER,L4_CONSUMER,L1_CONSUMER
+tables.outer: L1_CONSUMER
+tables.list:
+- name: L1_CONSUMER
+  foreign_keys:
+  - fk_column_names:
+    - foreign1
+    - foreign2
+    reference_column_names:
+    - destKey1
+    - destKey2
+    reference_table:
+    - name: L2_CONSUMER
+  - fk_column_names:
+    - foreignNew
+    reference_column_names:
+    - newKey
+    reference_table:
+    - name: L4_CONSUMER
+
+
+
+
+destination:
+  repository:
+    type: rdbms
+    rdbms:
+      # dialect: ansi
+      dialect: postgres
+      url: jdbc:postgresql://localhost:5432/devdb
+      dbschema: ptdm_o
+      username: rwuser
+      password: dev3456r0l3
+      configuration:
+         leakDetectionThreshold: 30000
+         maximumPoolSize: 25
+         poolName: rdbmsPool
+    ngbatch:
+      dialect: postgres
+      url: jdbc:postgresql://localhost:5432/nextgen_batch?currentSchema=${destination.repository.ngbatch.dbschema}
+      dbschema: nextgen_batch
+      username: rwuser
+      password: dev3456r0l3
+      configuration:
+        leakDetectionThreshold: 30000
+        maximumPoolSize: 25
+        poolName: ngbatchPool
+
+logging.level:
+  #org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+  #org.springframework.jdbc.core.JdbcTemplate: DEBUG
+  #com.acme.ng.provider.adapter: DEBUG
+  com.acme: OFF
+  org.springframework: OFF
+
+spring:
+  output.ansi.enabled: always
+  data:
+    mongodb:
+      uri: mongodb://rwUser:dev3456r0l3@localhost:27017/devDB
+    neo4j:
+      uri: bolt://localhost:7687
+      password: a65f3aa3
+      username: neo4j
+
+nextgen:
+  dispatcher:
+    uri: http://localhost:8082/nextgen/v1/dispatcher
+    endpoints:
+      unlockAdapterEvent: /adapter/event/unlock
+      unlockAdapterEvents: /adapter/event/unlockAll
+
+
+afd.enabled: false
+

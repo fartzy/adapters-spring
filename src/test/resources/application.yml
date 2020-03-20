@@ -1,0 +1,48 @@
+server:
+  port: 8090
+
+spring:
+  output.ansi.enabled: ALWAYS
+
+spring.h2.console.enabled: true
+spring.h2.console.path: /h2-console
+
+adapter:
+  sql.statements:
+    cache-evict:
+      rate.ms: 3600000
+  event.poller:
+      cron.expression: "0/10 * * * * ?"
+  context.name: PTDM
+  afd-event: nextgen.afd.adapter.event
+  job.scheduler.cron.expression: "0/30 * * * * ?"
+  batch:
+    chunk.size: 10
+    commit.interval: 5
+    skip.limit: 10
+    maximum.threads: 1
+    throttle.limit: 1
+  polling.strategies: ADAPTER_NAME:ADAPTER_BUS_ENTTY1234, ADAPTER_NAME:ADAPTER_BUS_ENTTY
+  #perform comparison with destination. default is true. set to false to skip comparison and force insert/update of destination.
+  performInstanceComparison: true
+
+events:
+  repository:
+    batch-size: 10
+  pool-size: 5
+
+destination:
+  repository:
+    type: rdbms
+    rdbms:
+      dialect: ansi
+      url: jdbc:h2:mem:testdb
+
+logging.level:
+  com.acme.ng.provider.adapter: DEBUG
+
+afd.enabled: false
+afd.uri: localhost:12345
+afd.protocol: http4
+
+

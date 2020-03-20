@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="jsonlogs">
+        <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+        <conversionRule
+                conversionWord="stacktrace"
+                converterClass="net.logstash.logback.stacktrace.ShortenedThrowableConverter" />
+        <appender name="CONSOLE-JSON" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <pattern>
+                        <pattern>
+                            {
+                            "timestamp": "%date{ISO8601}",
+                            "severity": "%level",
+                            "service": "${springAppName:-}",
+                            "trace": "%X{X-B3-TraceId:-}",
+                            "span": "%X{X-B3-SpanId:-}",
+                            "parent": "%X{X-B3-ParentSpanId:-}",
+                            "exportable": "%X{X-Span-Export:-}",
+                            "pid": "${PID:-}",
+                            "thread": "%thread",
+                            "class": "%logger{40}",
+                            "logmessage": "%message",
+                            "exception" : "%exception"
+                            <!--,"shortStack": "%stacktrace{short,short,short,rootFirst}"-->
+                            }
+                        </pattern>
+                    </pattern>
+                </providers>
+            </encoder>
+        </appender>
+
+        <root level="warn">
+            <appender-ref ref="CONSOLE-JSON"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="!jsonlogs">
+        <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+        <logger name="com.acme" level="INFO"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+</configuration>

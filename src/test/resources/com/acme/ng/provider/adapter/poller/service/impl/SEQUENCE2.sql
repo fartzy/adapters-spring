@@ -1,0 +1,1 @@
+CREATE SEQUENCE sequence2 START 20;

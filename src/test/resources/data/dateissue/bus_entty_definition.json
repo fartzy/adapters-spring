@@ -1,0 +1,77 @@
+{
+  "id" : "1fd06878-b060-4a9a-88c3-3365b6668c8d",
+  "tableName" : "BUS_ENTTY",
+  "tableColumns" : [
+    {
+      "name" : "BUS_ENTTY_KEY",
+      "type" : "NUMERIC",
+      "primaryKey" : true,
+      "foreignKey" : false,
+      "businessKey" : false,
+      "softRelation" : false,
+      "indexed" : false,
+      "skipCompare" : false,
+      "tableRelations" : [],
+      "description" : "",
+      "sequenceName" : "BUS_ENTTY_SEQ",
+      "addedFromBaseModelDefinition" : false
+    },
+    {
+      "name" : "BUS_ENTTY_STAT_CD",
+      "type" : "VARCHAR",
+      "size" : 25,
+      "primaryKey" : false,
+      "foreignKey" : false,
+      "businessKey" : false,
+      "softRelation" : true,
+      "indexed" : false,
+      "skipCompare" : false
+    },
+    {
+      "name" : "BUS_ENTTY_TY_CD",
+      "type" : "VARCHAR",
+      "size" : 25,
+      "primaryKey" : false,
+      "foreignKey" : false,
+      "businessKey" : false,
+      "softRelation" : true,
+      "indexed" : false,
+      "skipCompare" : false
+    },
+    {
+      "name" : "CRETD_TIMESTMP",
+      "type" : "TIMESTAMP",
+      "primaryKey" : false,
+      "foreignKey" : false,
+      "businessKey" : false,
+      "softRelation" : false,
+      "indexed" : false,
+      "skipCompare" : true,
+      "tableRelations" : [],
+      "description" : "",
+      "sequenceName" : "",
+      "addedFromBaseModelDefinition" : false
+    },
+    {
+      "name" : "EFF_DT",
+      "type" : "Date",
+      "size" : 7,
+      "primaryKey" : false,
+      "foreignKey" : false,
+      "businessKey" : false,
+      "softRelation" : false,
+      "indexed" : false,
+      "skipCompare" : true,
+      "tableRelations" : [],
+      "description" : "",
+      "sequenceName" : "",
+      "addedFromBaseModelDefinition" : false
+    }
+  ],
+  "avroSchemaName" : "BUS_ENTTY",
+  "defID" : "BUS_ENTTY_DEFID",
+  "defName" : "BUS_ENTTY",
+  "schemaName" : "PTDM",
+  "boundedContext" : "CONSUMER",
+  "primaryDomain" : "BUSINESS_ENTITY"
+}

@@ -1,0 +1,27 @@
+{
+  "id" : "d45d6027-3311-4fdd-b768-4e1615e6cdd7",
+  "status" : "TRIGGERED",
+  "dependenciesList" : [],
+  "adapterId" : "7429ffe4-26d4-4d07-9be3-2699736e758e",
+  "modelInstanceSnapshot" : {
+    "_id" : "c10899ab-9ebb-466c-985e-9cab921fbf3a",
+    "businessData" : {
+      "BUS_ENTTY_TY_CD" : null,
+      "BUS_ENTTY_STAT_CD" : "Active"
+    },
+    "type" : "BUS_ENTTY"
+  },
+  "previousInstanceSnapshot" : {
+    "id" : "c10899ab-9ebb-466c-985e-9cab921fbf3a",
+    "businessData" : {
+      "BUS_ENTTY_TY_CD" : null,
+      "BUS_ENTTY_STAT_CD" : "Active",
+      "CRETD_TIMESTMP" : "2018-10-05T12:38:44.205Z",
+      "EFF_DT" : "2018-10-05T00:00:00Z"
+    },
+    "type" : "BUS_ENTTY",
+    "deleted" : false,
+    "insertedInDestinationDb" : false
+  },
+  "overrideComparisonAtDestination" : false
+}
