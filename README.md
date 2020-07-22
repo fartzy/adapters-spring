@@ -1,4 +1,4 @@
-# NextGen Adapters
+# Adapters
 
 ### What is this project about?
 
