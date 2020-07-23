@@ -2,7 +2,7 @@
 
 ### What is this project about?
 
-An springboot based application that extends/completes a self-service BI suite to wrtie to a myriad of destination types. 
+A springboot based application that extends/completes a self-service BI suite to wrtie to a myriad of destination types. 
 
 Adapters project contains functionality related to providing hooks into communicating with destination(consumers) outside of NextGen environment.
 
